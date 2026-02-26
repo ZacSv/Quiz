@@ -30,19 +30,21 @@ object AppModule {
         return FirebaseAuth.getInstance()
     }
 
+    // 1. Fornece o Firestore (Nuvem)
     @Provides
     @Singleton
     fun provideFirebaseFirestore(): FirebaseFirestore {
         return FirebaseFirestore.getInstance()
     }
 
+    // 2. Fornece a Base de Dados Local (Room)
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            "app_database"
+            "quiz_database"
         ).fallbackToDestructiveMigration().build()
     }
 
@@ -52,6 +54,7 @@ object AppModule {
         return appDatabase.userDao()
     }
 
+    // 3. Atualiza o Repositório para receber as novas dependências
     @Provides
     @Singleton
     fun provideAuthRepository(

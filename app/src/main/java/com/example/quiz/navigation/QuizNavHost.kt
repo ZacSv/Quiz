@@ -34,7 +34,7 @@ object QuizRoute
 data class QuizResultRoute(
     val totalQuestions: Int,
     val correctAnswers: Int,
-    val scorePercentage: Double,
+    val scorePercentage: Float,
     val totalTimeSeconds: Long
 )
 
@@ -106,7 +106,7 @@ fun AppNavigation() {
                         QuizResultRoute(
                             totalQuestions = total,
                             correctAnswers = correct,
-                            scorePercentage = percentage,
+                            scorePercentage = percentage.toFloat(),
                             totalTimeSeconds = time
                         )
                     ) {
@@ -122,7 +122,7 @@ fun AppNavigation() {
             QuizResultScreen(
                 totalQuestions = route.totalQuestions,
                 correctAnswers = route.correctAnswers,
-                scorePercentage = route.scorePercentage,
+                scorePercentage = route.scorePercentage.toDouble(),
                 totalTimeSeconds = route.totalTimeSeconds,
                 onPlayAgain = {
                     navController.navigate(QuizRoute) {
